@@ -24,29 +24,46 @@ app.get('/movies', (req, res) => {
 
 //movie name
 app.get('/movies/:movie', (req, res) => {
-  const movie = req.params.movie
+  const { movie } =req.params
   const oneMovie = data.filter((item) => item.movie_title === movie)
 
-  res.json(oneMovie)
+  if (oneMovie.length > 0 ) {
+    res.json(oneMovie)
+  }
+  else {
+    res.status(404).send({message: 'no movie found'})
+  }
 })
 
 //genre 
-app.get('/movies/:genre', (req, res) => {
+app.get('/movies/genre/:genre', (req, res) => {
   const genre = req.params.genre
   const oneGenre = data.filter((item) => item.genre === genre)
 
-  res.json(oneGenre)
+  if (oneGenre.length > 0 ) {
+    res.json(oneGenre)
+  }
+  else {
+    res.status(404).send({message: 'no genre found'})
+  }
 })
 
-
 //full release date 
-app.get('/movies/:release', (req, res) => {
+app.get('/movies/release/:release', (req, res) => {
   const release = req.params.release
   const realseDate = data.filter((item) => item.release_date === release)
 
   res.json(realseDate)
 })
 
+//endpoints for redlevel
+app.get('/movies/rating/:rating', (req, res) => {
+  // mpaa_rating
+})
+
+app.get('/movies/total/total-gross', (req, res) => {
+  // total gross 
+})
 
 
 
